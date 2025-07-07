@@ -1,12 +1,11 @@
 #!/bin/bash
 
-echo "📦 نصب پیش‌نیازها در محیط ایزوله..."
-
 INSTALL_DIR="/opt/sync-xui-uuid"
 PYENV_DIR="$INSTALL_DIR/venv"
 
+echo "📦 نصب پیش‌نیازها در محیط ایزوله..."
 sudo mkdir -p $INSTALL_DIR
-sudo cp -r * $INSTALL_DIR
+sudo cp -r $(dirname "$0")/* $INSTALL_DIR
 cd $INSTALL_DIR || exit
 
 sudo apt update -y
@@ -17,4 +16,4 @@ source $PYENV_DIR/bin/activate
 pip install --no-cache-dir requests
 
 echo "🚀 اجرای اسکریپت..."
-python3 sync_xui_uuid.py
+$PYENV_DIR/bin/python3 $INSTALL_DIR/sync_xui_uuid.py
